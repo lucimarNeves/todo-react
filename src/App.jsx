@@ -5,6 +5,7 @@ import TodoForm from "./components/TodoForm"
 import Search from './components/Search';
 
 import './App.css'
+import Filter from './components/Filter';
 
 function App() {
   const [todos, setTodos] = useState([
@@ -29,6 +30,8 @@ function App() {
   ]);
 
   const [search, setSearch] = useState("")
+  const [filter, setFilter] = useState("All")
+  const [sort, setSort] = useState("Asc")
 
   const addTodo = (text, category) => {
 
@@ -66,9 +69,20 @@ return (
   <div className="app">
     <h1> Lista de Tarefas</h1>
     <Search  search={search} setSearch={setSearch}/>
+    <Filter filter={filter} setFilter={setFilter}/>
+ 
     <div className="todo-list">
 
-      {todos.filter((todo) => todo.text.toLocaleLowerCase().includes(
+      {todos
+        .filter((todo) => 
+            filter === "All"
+            ? true 
+            :filter === "Completed"
+            ? todo.isCompleted 
+            : !todo.isCompleted
+        )
+        .filter((todo) => 
+        todo.text.toLocaleLowerCase().includes(
         search.toLocaleLowerCase()
       )).
       map((todo) => (
