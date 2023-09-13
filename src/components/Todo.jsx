@@ -6,8 +6,8 @@ const todo = ({ todo }) => {
     <div className="content">
       <p>{todo.text}</p>
       
-      <p className="categry">
-        {todo.categoria}
+      <p className="category">
+        ({todo.category})
       </p>
       <div>
         <button className="complete"> Completar</button>

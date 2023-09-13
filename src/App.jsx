@@ -10,37 +10,52 @@ function App() {
     {
       id: 1,
       text: "Criar funcionalidade X no sistema",
-      categoria: "Trabalho",
+      category: "Trabalho",
       isCompleted: false,
     },
     {
       id: 2,
       text: "Ir para a academia",
-      categoria: "Pessoal",
+      category: "Pessoal",
       isCompleted: false,
     },
     {
       id: 3,
       text: "Estudar React",
-      categoria: "Estudos",
+      category: "Estudos",
       isCompleted: true,
     },
-  ])
+  ]);
 
-  return (
+  const addTodo = (text, category) => {
 
-    <div className="app">
-      <h1> Lista de Tarefas</h1>
-      <div className="todo-list">
-     
-        {todos.map((todo) => (
-           <Todo  todo={todo}/>
-        ))}
+    const newTodos = [
+      ...todos,
+      {
+        id: Math.floor(Math.random() * 10000),
+        text,
+        category,
+        isCompleted: false,
+      },
+    ];
+    setTodos(newTodos);
+  };
 
-      </div>
-      <TodoForm />
+
+return (
+
+  <div className="app">
+    <h1> Lista de Tarefas</h1>
+    <div className="todo-list">
+
+      {todos.map((todo) => (
+        <Todo key={todo.id} todo={todo} />
+      ))}
+
     </div>
-  )
+    <TodoForm addTodo = {addTodo} />
+  </div>
+);
 }
 
 export default App
